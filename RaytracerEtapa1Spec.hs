@@ -25,11 +25,3 @@ main = hspec $ do
   describe "a valid string to the .ppm image" $ do
     it "returns a valid string for a .ppm image" $ do
       (create_text_to_ppm_file 2 3 [(1, 2, 3)])  `shouldBe` "P3\n# It's a .ppm imagem for a raytracer\n2 3\n255\n1 2 3\n"
-    --it "returns the first element of a list" $ do
-    --  head [2, 3 ..] `shouldBe` (23 :: Int)
-
-    --it "returns the first element of an *arbitrary* list" $
-    --  property $ \x xs -> head (x:xs) == (x :: Int)
-
-    --it "throws an exception if used with an empty list" $ do
-    --  evaluate (head []) `shouldThrow` anyException
