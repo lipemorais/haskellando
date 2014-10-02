@@ -42,6 +42,3 @@ data Vetor  = Pixel(Int, Int, Int)
 --Divisão por escalar: (x1, y1, z1)/a = (x1/a, y1/a, z1/a)
 ($/) :: (Double, Double, Double) -> Double -> (Double, Double, Double)
 (x1, y1, z1) $/ escalar = (x1 / escalar, y1 / escalar, z1 / escalar)
-
-
--- TODO
