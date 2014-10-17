@@ -48,4 +48,16 @@ create_text_to_ppm_file width height pixels = (p3 ++ comment ++ (show width) ++ 
 --Cores que para mim são pixels
 
 --TODO
--- Usar a dica que o Rafael deu no e-mail para melhorar os testes.
+--Usar a dica que o Rafael deu no e-mail para melhorar os testes:
+--Que tal experimentar um pouco com a função property também?
+--Por exemplo, a função pixelToString sempre gera dois espaços em branco, a gente poderia escrever o seguinte:
+
+--    it "should always have two empty spaces" $
+--        property $ \x y z -> (length $ filter (==' ') $ pixelToString (x, y, z)) == 2
+
+--    Não testei para ver se funciona :P, mas acho que é isso.
+--    Quais outras invariantes a gente consegue achar no código?
+--    A parte com operações vetoriais pode ter umas interessantes.
+--    Por exemplo, a expressão a seguir deve ser verdadeira
+--    para todo x diferente de 0:
+--    v $* x $/ x == v.
