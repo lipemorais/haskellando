@@ -1,7 +1,7 @@
 --Script para gerar o início de um arquivo .ppm
 
 
-module RaytracerEtapa2 where
+module RaytracerEtapa2_1113331018 where
 
 --Creating a function to tranform pixel in string
 pixelToString :: (Int, Int, Int) -> String
@@ -16,12 +16,6 @@ comment = "# It's a .ppm imagem for a raytracer\n"
 create_text_to_ppm_file :: Int -> Int -> [(Int, Int, Int)] -> String
 create_text_to_ppm_file _ _ [] = "Nao e possivel criar uma imagem sem pixels"
 create_text_to_ppm_file width height pixels = (p3 ++ comment ++ (show width) ++ " " ++ (show height) ++ "\n" ++ "255\n" ++ (foldr (++) "" (map pixelToString pixels)))
-
--- Cria um um tipo Cor que é formado por uma tupla de inteiro e um outro tipo coordenada que é uma tupla de Double
--- e deriva da classe Show a forma de imprimir
-data Vetor  = Pixel(Int, Int, Int)
-            | Coordenada(Double, Double, Double)
-            deriving (Show)
 
 --Soma vetorial: (x1, y1, z1) + (x2, y2, z2) = (x1 + x2, y1 + y2, z1 + z2)
 ($+) :: (Double, Double, Double) -> (Double, Double, Double) -> (Double, Double, Double)

@@ -1,5 +1,5 @@
 import Test.Hspec
-import RaytracerEtapa2
+import RaytracerEtapa2_1113331018
 
 
 main :: IO ()
