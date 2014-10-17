@@ -1,5 +1,5 @@
 --Script para gerar o início de um arquivo .ppm
-module RaytracerEtapa1 where
+module RaytracerEtapa1_1113331018 where
 
 --Creating a function to tranform pixel in string
 pixelToString :: (Int, Int, Int) -> String
