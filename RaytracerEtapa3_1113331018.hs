@@ -1,13 +1,16 @@
 --Script para gerar o início de um arquivo .ppm
 
 
-module RaytracerEtapa2_1113331018 where
+module RaytracerEtapa3_1113331018 where
 
--- Cria um um tipo Cor que é formado por uma tupla de inteiro e um outro tipo coordenada que é uma tupla de Double
--- e deriva da classe Show a forma de imprimir
+--Cria um um tipo Cor que é formado por uma tupla de inteiro e um outro tipo coordenada que é uma tupla de Double
+--e deriva da classe Show a forma de imprimir
+
+--O data nada mais é que um guarda chuva de construtores de objetos no meu caso tenho dois tipos de construtores um para Pixel outro para Coordenada ambos são Vetor3D
+
 data Vetor3D  = Pixel(Int, Int, Int)
             | Coordenada(Double, Double, Double)
-            deriving (Show)
+            deriving (Show, Eq)
 
 --Creating a function to tranform pixel in string
 pixelToString :: (Int, Int, Int) -> String
@@ -25,29 +28,37 @@ create_text_to_ppm_file width height pixels = (p3 ++ comment ++ (show width) ++ 
 
 
 --Soma vetorial: (x1, y1, z1) + (x2, y2, z2) = (x1 + x2, y1 + y2, z1 + z2)
-($+) :: Coordenada -> Coordenada -> Coordenada
-(x1, y1, z1) $+ (x2, y2, z2) = (x1 + x2, y1 + y2, z1 + z2)
+($+) :: Vetor3D -> Vetor3D -> Vetor3D
+Coordenada(x1, y1, z1) $+ Coordenada(x2, y2, z2) = Coordenada(x1 + x2, y1 + y2, z1 + z2)
+Pixel(x1, y1, z1) $+ Pixel(x2, y2, z2) = Pixel(x1 + x2, y1 + y2, z1 + z2)
 
 --Subtração vetorial: (x1, y1, z1) − (x2, y2, z2) = (x1 − x2, y1 − y2, z1 − z2)
-($-) :: Coordenada -> Coordenada -> Coordenada
-(x1, y1, z1) $- (x2, y2, z2) = (x1 - x2, y1 - y2, z1 - z2)
+($-) :: Vetor3D -> Vetor3D -> Vetor3D
+Coordenada(x1, y1, z1) $- Coordenada(x2, y2, z2) = Coordenada(x1 - x2, y1 - y2, z1 - z2)
+Pixel(x1, y1, z1) $- Pixel(x2, y2, z2) = Pixel(x1 - x2, y1 - y2, z1 - z2)
 
 --Produto escalar: (x1, y1, z1).(x2, y2, z2) = x1x2 + y1y2 + z1z2
-($.) :: Coordenada -> Coordenada -> Double
-(x1, y1, z1) $. (x2, y2, z2) = ((x1 * x2) + (y1 * y2) + (z1 * z2))
+($.) :: Vetor3D -> Vetor3D -> Double
+Coordenada(x1, y1, z1) $. Coordenada(x2, y2, z2) = ((x1 * x2) + (y1 * y2) + (z1 * z2))
+Pixel(x1, y1, z1) $. Pixel(x2, y2, z2) = fromIntegral ((x1 * x2) + (y1 * y2) + (z1 * z2))
 
 --Multiplicação por escalar: a(x1, y1, z1) = (ax1, ay1, az1)
-($*) :: Coordenada -> Double -> Coordenada
-(x1, y1, z1) $* escalar = (x1 * escalar, y1 * escalar, z1 * escalar)
+($*) :: Vetor3D -> Double -> Vetor3D
+Coordenada(x1, y1, z1) $* escalar = Coordenada(x1 * escalar, y1 * escalar, z1 * escalar)
+Pixel(x1, y1, z1) $* escalar = Pixel(x1 * (floor escalar), y1 * (floor escalar), z1 * (floor escalar))
 
 --Divisão por escalar: (x1, y1, z1)/a = (x1/a, y1/a, z1/a)
-($/) :: Coordenada -> Double -> Coordenada
-(x1, y1, z1) $/ escalar = (x1 / escalar, y1 / escalar, z1 / escalar)
+($/) :: Vetor3D -> Double -> Vetor3D
+Coordenada(x1, y1, z1) $/ escalar = Coordenada(x1 / escalar, y1 / escalar, z1 / escalar)
+Pixel(x1, y1, z1) $/ escalar = Pixel(floor((fromIntegral x1) / escalar), floor(fromIntegral y1 / escalar), floor(fromIntegral z1 / escalar))
 
 --OBS.:
 --Cores que para mim são pixels
 
 --TODO
+
+
+
 --Usar a dica que o Rafael deu no e-mail para melhorar os testes:
 --Que tal experimentar um pouco com a função property também?
 --Por exemplo, a função pixelToString sempre gera dois espaços em branco, a gente poderia escrever o seguinte:
