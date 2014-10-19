@@ -1,5 +1,5 @@
 import Test.Hspec
-import RaytracerEtapa2_1113331018
+import RaytracerEtapa3_1113331018
 
 
 main :: IO ()
@@ -26,18 +26,34 @@ main = hspec $ do
     it "returns a valid string for the file" $ do
       (create_text_to_ppm_file 2 3 [(1, 2, 3)])  `shouldBe` "P3\n# It's a .ppm imagem for a raytracer\n2 3\n255\n1 2 3\n"
 
-  describe "the aritmethic operations" $ do
+  describe "the aritmethic operations for Coordenada" $ do
     it "returns vetorial sum of two vectors" $ do
-      ((1, 2, 3) $+ (1, 2, 3)) `shouldBe` (2, 4, 6)
+      (Coordenada(1, 2, 3) $+ Coordenada(1, 2, 3)) `shouldBe` Coordenada(2, 4, 6)
 
     it "returns a vetorial minus of two vectors" $ do
-      ((1, 2, 3) $- (1, 2, 3)) `shouldBe` (0, 0, 0)
+      (Coordenada(1, 2, 3) $- Coordenada(1, 2, 3)) `shouldBe` Coordenada(0, 0, 0)
 
     it "returns each elements times escalar value" $ do
-      ((1, 2, 3) $* 3) `shouldBe` (3, 6, 9)
+      (Coordenada(1, 2, 3) $* 3) `shouldBe` Coordenada(3, 6, 9)
 
     it "returns each elements divided by escalar value" $ do
-      ((3, 3, 3) $/ 3) `shouldBe` (1, 1, 1)
+      (Coordenada(3, 3, 3) $/ 3) `shouldBe` Coordenada(1, 1, 1)
 
     it "returns a sum of each element of the vector times its correpondent in the second one" $ do
-      ((1, 2, 3) $. (1, 2, 3)) `shouldBe` 14
+      (Coordenada(1, 2, 3) $. Coordenada(1, 2, 3)) `shouldBe` 14
+
+  describe "the aritmethic operations for Pixel" $ do
+    it "returns vetorial sum of two vectors" $ do
+      (Pixel(1, 2, 3) $+ Pixel(1, 2, 3)) `shouldBe` Pixel(2, 4, 6)
+
+    it "returns a vetorial minus of two vectors" $ do
+      (Pixel(1, 2, 3) $- Pixel(1, 2, 3)) `shouldBe` Pixel(0, 0, 0)
+
+    it "returns each elements times escalar value" $ do
+      (Pixel(1, 2, 3) $* 3) `shouldBe` Pixel(3, 6, 9)
+
+    it "returns each elements divided by escalar value" $ do
+      (Pixel(3, 3, 3) $/ 3) `shouldBe` Pixel(1, 1, 1)
+
+    it "returns a sum of each element of the vector times its correpondent in the second one" $ do
+      (Pixel(1, 2, 3) $. Pixel(1, 2, 3)) `shouldBe` 14
